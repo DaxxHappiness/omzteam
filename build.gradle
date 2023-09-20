@@ -44,6 +44,13 @@ dependencies {
     //  jsp 사용할 수 있게 해주는 것들
 //    implementation 'javax.servlet:jstl'
 //    implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
+
+    // JSoup 크롤링
+    implementation 'org.jsoup:jsoup:1.14.3'
+
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
+
 }
 
 tasks.named('test') {
