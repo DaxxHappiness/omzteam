@@ -10,4 +10,8 @@ public class MybatisConfig {
     public static void main(String[] args) {
         SpringApplication.run(MybatisConfig.class, args);
     }
+
+    public void aa(){
+
+    }
 }
