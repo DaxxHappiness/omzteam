@@ -41,6 +41,8 @@ dependencies {
     implementation('ch.qos.logback:logback-classic')
     implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4:1.16'
 
+    // test 주석
+    
     //  jsp 사용할 수 있게 해주는 것들
 //    implementation 'javax.servlet:jstl'
 //    implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
