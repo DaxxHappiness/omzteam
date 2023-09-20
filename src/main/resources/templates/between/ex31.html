@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>크롤링</title>
+</head>
+<body>
+<h1>크롤링 결과</h1>
+<div th:text="${scrapeData}" id="scrapeData"></div>
+<div th:text="${scrapeData2}"></div>
+<div th:text="${priceInDollars}"></div>
+
+<form id="productForm">
+    <label for="productType">제품 선택:</label>
+    <select id="productType" name="productType">
+        <option value="">--선택--</option>
+        <option value="cpu">CPU</option>
+        <option value="memory">메모리</option>
+        <option value="graphicsCard">그래픽 카드</option>
+    </select>
+
+    <!-- 모델명 선택 상자 -->
+    <div id="modelSelection" style="display:none;">
+        <label for="modelName">모델명 선택:</label>
+        <select id="modelName" name="modelName">
+            <!-- 각 제품에 대한 모델명 옵션을 동적으로 추가 -->
+        </select>
+    </div>
+
+    <button type="button" id="submitBtn">제출</button> <!-- type을 "button"으로 수정 -->
+</form>
+
+<div id="selectedModel"></div>
+
+<script>
+    // 품목 선택 상자 변경 이벤트 핸들러
+    document.getElementById("productType").addEventListener("change", function() {
+        var selectedProduct = this.value;
+        var modelSelection = document.getElementById("modelSelection");
+        var modelNameSelect = document.getElementById("modelName");
+
+        // 모델명 선택 상자를 초기화
+        modelNameSelect.innerHTML = "";
+
+        // 품목에 따라 모델명 옵션을 동적으로 추가
+        if (selectedProduct === "cpu") {
+            addOption(modelNameSelect, "--선택--");
+            addOption(modelNameSelect, "인텔 코어i5-13세대 13400F (랩터레이크)");
+            addOption(modelNameSelect, "모델 2");
+            addOption(modelNameSelect, "모델 3");
+        } else if (selectedProduct === "memory") {
+            addOption(modelNameSelect, "메모리 모델 1");
+            addOption(modelNameSelect, "메모리 모델 2");
+            addOption(modelNameSelect, "메모리 모델 3");
+        } else if (selectedProduct === "graphicsCard") {
+            addOption(modelNameSelect, "그래픽 카드 모델 1");
+            addOption(modelNameSelect, "그래픽 카드 모델 2");
+            addOption(modelNameSelect, "그래픽 카드 모델 3");
+        }
+
+        // 모델명 선택 상자를 표시
+        modelSelection.style.display = "block";
+    });
+
+    document.getElementById("submitBtn").addEventListener("click", function() {
+        var selectedModel = document.getElementById("modelName").value;
+
+        // AJAX를 사용하여 선택한 모델명을 서버로 보내어 업데이트된 데이터를 받아옵니다.
+        fetch("/between/updateScrapeData?model=" + selectedModel, { method: "POST" })
+            .then(response => response.text())
+            .then(data => {
+                // 업데이트된 데이터를 출력할 요소에 적용
+                document.getElementById("selectedModel").textContent = data;
+            });
+    });
+
+
+    // 옵션을 선택 상자에 추가하는 함수
+    function addOption(selectElement, optionText) {
+        var option = document.createElement("option");
+        option.value = optionText;
+        option.text = optionText;
+        selectElement.appendChild(option);
+    }
+</script>
+</body>
+</html>
