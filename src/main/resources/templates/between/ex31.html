@@ -6,9 +6,7 @@
 </head>
 <body>
 <h1>크롤링 결과</h1>
-<div th:text="${scrapeData}" id="scrapeData"></div>
-<div th:text="${scrapeData2}"></div>
-<div th:text="${priceInDollars}"></div>
+<p>현재 실시간 환율 : [[${scraperData.rate}]]</p>
 
 <form id="productForm">
     <label for="productType">제품 선택:</label>
@@ -30,7 +28,10 @@
     <button type="button" id="submitBtn">제출</button> <!-- type을 "button"으로 수정 -->
 </form>
 
-<div id="selectedModel"></div>
+<div id="selectedModel" th:style="${selectedModelStyle}">
+
+
+</div>
 
 <script>
     // 품목 선택 상자 변경 이벤트 핸들러
@@ -45,8 +46,8 @@
         // 품목에 따라 모델명 옵션을 동적으로 추가
         if (selectedProduct === "cpu") {
             addOption(modelNameSelect, "--선택--");
-            addOption(modelNameSelect, "인텔 코어i5-13세대 13400F (랩터레이크)");
-            addOption(modelNameSelect, "모델 2");
+            addOption(modelNameSelect, "Core i9-11900K");
+            addOption(modelNameSelect, "Ryzen 9 5900X");
             addOption(modelNameSelect, "모델 3");
         } else if (selectedProduct === "memory") {
             addOption(modelNameSelect, "메모리 모델 1");
@@ -58,24 +59,28 @@
             addOption(modelNameSelect, "그래픽 카드 모델 3");
         }
 
-        // 모델명 선택 상자를 표시
+
         modelSelection.style.display = "block";
     });
 
     document.getElementById("submitBtn").addEventListener("click", function() {
-        var selectedModel = document.getElementById("modelName").value;
+        var selectedModel = encodeURIComponent(document.getElementById("modelName").value);
 
-        // AJAX를 사용하여 선택한 모델명을 서버로 보내어 업데이트된 데이터를 받아옵니다.
-        fetch("/between/updateScrapeData?model=" + selectedModel, { method: "POST" })
+
+
+
+        fetch("/between/updateScrapeData?model2=" + selectedModel, { method: "POST" })
             .then(response => response.text())
             .then(data => {
                 // 업데이트된 데이터를 출력할 요소에 적용
                 document.getElementById("selectedModel").textContent = data;
+                console.log(data);
+                selectedModelStyle = "display: block;"; // 데이터를 받아올 때 보이도록 변경
             });
     });
 
 
-    // 옵션을 선택 상자에 추가하는 함수
+
     function addOption(selectElement, optionText) {
         var option = document.createElement("option");
         option.value = optionText;
