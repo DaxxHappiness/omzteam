@@ -5,17 +5,16 @@
     <title>Title</title>
 </head>
 <body>
-<form action="approvalResultForm.html" method="post">
+<form action="/approvalResultForm" method="post" th:object="${approvalDto}">
 
     <label for="pass">통과 여부:</label>
-    <textarea id="pass" name="pass"></textarea><br/>
+    <textarea id="pass" name="pass" th:field="*{approval.pass}"></textarea><br/>
 
     <label for="comment">코멘트:</label>
-    <textarea id="comment" name="comment"></textarea><br/>
+    <textarea id="comment" name="comment" th:field="*{approval.comment}"></textarea><br/>
 
-<input type="submit" value="완료">
+    <input type="submit" value="완료">
 
 </form>
-
 </body>
 </html>

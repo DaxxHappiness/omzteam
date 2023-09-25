@@ -3,6 +3,7 @@ package com.class302.omzteam.controller;
 import com.class302.omzteam.model.ApprovalDto;
 import com.class302.omzteam.mybatis.ApprovalDao;
 import com.class302.omzteam.mybatis.MybatisDao;
+import com.class302.omzteam.service.ApprovalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,16 +72,15 @@ public class MyController {
 
     //결재 폼 작성
     @GetMapping("/approvalWriteForm")
-    public String doApproval() {
-
-
+    public String showApprovalForm() {
         return "approvalWriteForm";
     }
 
     @PostMapping("/approvalResultForm")
-    public String doneApproval(@RequestParam("pass") String pass, @RequestParam("comment") String comment) {
-        System.out.println(pass);
-        System.out.println(comment);
+    public String processApprovalForm(@ModelAttribute ApprovalDto approvalDto) {
+
+        approvalDao.updateOne(approvalDto);
+
         return "approvalResultForm";
     }
 
