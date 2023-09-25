@@ -210,6 +210,19 @@
 				}
 			});
 
+			document.getElementById("resultB").addEventListener("mouseover", function (event) {
+				if (event.target.id === "itName") {
+					event.target.style.color = "red";
+				}
+			}, false);
+
+
+			document.getElementById("resultB").addEventListener("mouseout", function(event){
+				if (event.target.id === "itName") {
+					event.target.style.color = "black";
+				}
+			}, false);
+
 			document.getElementById("resultW").addEventListener("click", function (event) {
 				if (event.target.id === "itWName") {
 					// 클릭된 요소가 "itName" ID를 가진 경우 처리
@@ -223,12 +236,25 @@
 				}
 			});
 
+			document.getElementById("resultW").addEventListener("mouseover", function (event) {
+				if (event.target.id === "itWName") {
+					event.target.style.color = "red";
+				}
+			}, false);
+
+
+			document.getElementById("resultW").addEventListener("mouseout", function(event){
+				if (event.target.id === "itWName") {
+					event.target.style.color = "black";
+				}
+			}, false);
+
 		});
 
 		let container = document.getElementById('map');
 		let options = {
-			center: new kakao.maps.LatLng(35.88041402293948, 127.73770987595455),
-			level: 13
+			center: new kakao.maps.LatLng(37.50656097778427, 127.03839728557357),
+			level: 10
 		};
 		let map = new kakao.maps.Map(container, options);
 
@@ -328,11 +354,21 @@
 			overlay.setContent(content);
 
 			kakao.maps.event.addListener(marker, 'click', function () {
+				let pos = marker.getPosition();
+				console.log(pos);
+				panTo(pos);
+
 				if(overlay.getMap() === map){
 					overlay.setMap(null);
 				}
 				overlay.setMap(map);
+
 			});
+		}
+
+		function panTo(pos) {
+			var moveLatLon = new kakao.maps.LatLng(pos.Ma, pos.La);
+			map.panTo(moveLatLon);
 		}
 
 		function displayMarkerB(data) {
@@ -392,6 +428,10 @@
 			overlay.setContent(content);
 
 			kakao.maps.event.addListener(marker, 'click', function () {
+				let pos = marker.getPosition();
+				console.log(pos);
+				panTo(pos);
+
 				if (overlay.getMap() === map) {
 					overlay.setMap(null);
 				}
