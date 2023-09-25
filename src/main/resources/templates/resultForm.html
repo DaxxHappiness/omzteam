@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 작성 결과</title>
+</head>
+<body>
+<h1>작성 완료</h1>
+<p>제목: <span th:text="${approvalDto.title}"></span></p>
+<p>본문: <span th:text="${approvalDto.content}"></span></p>
+<a href="/goMain">목록으로</a>
+<a th:href="@{/approvalWriteForm(board_id=${approvalDto.board_id})}">결재</a>
+</body>
+</html>

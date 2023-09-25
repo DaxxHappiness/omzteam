@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+</head>
+<body>
+<h1>User List</h1>
+<table>
+    <head>
+    <tr>
+        <th>글번호</th>
+        <th>상태</th>
+        <th>지역번호</th>
+        <th>작성자</th>
+        <th>결재자</th>
+        <th>글제목</th>
+        <th>작성일시</th>
+        <th>결재일시</th>
+
+    </tr>
+    </head>
+    <body>
+    <tr th:each="app : ${list}">
+        <td th:text="${app.board_id}"></td>
+        <td th:text="${app.pass}"></td>
+        <td th:text="${app.areacode}"></td>
+        <td th:text="${app.member_name}"></td>
+        <td th:text="${app.member_name2}"></td>
+        <td><a th:href="@{/goRead(board_id=${app.board_id})}">[[${app.title}]]</a></td>
+
+        <td th:text="${app.regdate}"></td>
+        <td th:text="${app.comdate}"></td>
+    </tr>
+    </body>
+    <a href="/writeForm">작성</a>
+</table>
+</body>
+</html>
+
+
+
+
+
+
