@@ -48,6 +48,9 @@ dependencies {
 //    //JSON형식 사용 위해 추가
 //    implementation 'org.springframework.boot:spring-boot-configuration-processor:2.7.7'
 
+//    //JSON형식 사용 위해 추가
+//    implementation 'org.springframework.boot:spring-boot-configuration-processor:2.7.7'
+
 }
 
 tasks.named('test') {
