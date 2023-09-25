@@ -12,6 +12,8 @@
 	<mappers>
 		<!-- 마이바티스 매퍼 XML 파일 -->
 		<mapper resource="classpath:mapper/MemberMapper.xml" />
+		<mapper resource="classpath:mapper/BranchDao.xml"/>
+		<mapper resource="classpath:mapper/WarehouseDao.xml"/>
 	</mappers>
 	
 </configuration>

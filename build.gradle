@@ -44,6 +44,10 @@ dependencies {
     //  jsp 사용할 수 있게 해주는 것들
 //    implementation 'javax.servlet:jstl'
 //    implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
+    
+//    //JSON형식 사용 위해 추가
+//    implementation 'org.springframework.boot:spring-boot-configuration-processor:2.7.7'
+
 }
 
 tasks.named('test') {
