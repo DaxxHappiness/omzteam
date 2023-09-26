@@ -13,8 +13,8 @@ public class MyController {
     @Autowired
     MybatisDao mybatisDao;
 
-    @GetMapping("/test")
-    public void test() {
-        log.info("------------ count {}", mybatisDao.selectCount());
-    }
+//    @GetMapping("/test")
+//    public void test() {
+//        log.info("------------ count {}", mybatisDao.selectCount());
+//    }
 }
