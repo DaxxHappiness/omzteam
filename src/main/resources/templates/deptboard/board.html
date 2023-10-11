@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>부서 게시판</title>
+</head>
+<body>
+<table border="1" th:each="dto: ${board}">
+    <tr>
+        <td colspan='2'>[[${dto.title}]]</td>
+    </tr>
+    <tr>
+        <td>[[${dto.writer}]]</td><td>[[${dto.regdate}]]</td>
+    </tr>
+    <tr>
+        <td colspan='2'>[[${dto.content}]]</td>
+    </tr>
+    <tr th:each="user: ${user}">
+        <td th:if="${dto.mem_no == user.mem_no}"><a th:href="@{/deptboard/boardupdate(bod_no=${dto.bod_no})}">수정하기</a></td>
+        <td th:if="${authority}"><a th:href="@{/deptboard/delete(bod_no=${dto.bod_no})}"id="lastCheck">삭제하기</a></td>
+    </tr>
+    <tr>
+        <td>최종 수정일</td> <td>[[${dto.updatedate}]]</td>
+    </tr>
+</table>
+============댓글===========================
+<form action="/deptboard/comment" method="get">
+    <table>
+        <tr><td><input type="text" name="comment"></td><td><input type="submit" value="댓글달기"></td></tr>
+    </table>
+    <input type="hidden" name="bod_no" th:value="${board.bod_no}">
+</form>
+<table border="1" th:each="dto: ${comment}">
+    <tr>
+        <td>[[${dto.mem_name}]]</td><td>[[${dto.job}]]</td><td>[[${dto.regdate}]]</td>
+    </tr>
+    <tr>
+        <td colspan='2'>[[${dto.comment}]]</td><td th:if ="${user.mem_no == dto.mem_no}"><a th:href="@{/deptboard/commentdelete(comment_no=${dto.comment_no},bod_no=${dto.bod_no})}">삭제하기</td>
+    </tr>
+</table>
+
+
+<script>
+    var lastCheck = document.getElementById('lastCheck');
+    lastCheck.addEventListener('click', function(event) {
+        var isConfirmed = confirm('정말 삭제하시겠습니까?');
+        if (!isConfirmed) {
+            event.preventDefault();
+        }
+    });
+</script>
+</body>
+</html>

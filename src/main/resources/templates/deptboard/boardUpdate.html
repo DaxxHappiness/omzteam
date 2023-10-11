@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>부서 게시판</title>
+</head>
+<body>
+<form action="update">
+<table border="1">
+
+    <tr>
+        <td>제목</td><td><input type="text" name="title" th:value="${board.title}"></td>
+    </tr>
+    <tr>
+        <td>[[${board.writer}]]</td><td>[[${board.regdate}]]</td>
+    </tr>
+    <tr>
+        <td colspan='2'><textarea cols="50" rows="10" name="content" th:text="${board.content}"></textarea></td>
+    </tr>
+    <tr>
+        <td colspan='2'><input type="checkbox" name="notification"  th:checked="${board.is_notice == 1}" value="1">중요공지</td>
+    </tr>
+
+</table>
+    <input type="hidden" name="bod_no" th:value="${board.bod_no}">
+    <input type="submit" value="수정하기">
+</form>
+</body>
+</html>

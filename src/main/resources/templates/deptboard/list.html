@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>부서 게시판</title>
+</head>
+<body>
+<form method="post">
+    <table>
+        <tr>
+            <td><input type="text" name="value"></td>
+            <td>
+                <select name="select">
+                    <option value="1">작성자</option>
+                    <option value="2">제목</option>
+                </select>
+            </td>
+            <td><input type="submit" value="검색"></td>
+        </tr>
+    </table>
+</form>
+<table border="1">
+    <tr>
+        <th colspan='4' >부서 공지사항</th>
+    </tr>
+    <tr th:each="dto : ${list}">
+        <td>
+            <a th:href="@{/deptboard/board(bod_no=${dto.bod_no})}">[[${dto.title}]]</a>
+        </td>
+        <td th:text="${dto.writer}"></td>
+        <td colspan='2' th:text="${dto.updatedate}"></td>
+    </tr>
+</table>
+<table>
+<tr>
+    <td th:each="iteration : ${#numbers.sequence(page.startPage, page.endPage)}"><a th:href="@{/deptboard/list(pageNo=${iteration})}">[[${iteration}]]</a></td>
+</tr>
+</table>
+<a th:href="@{/deptboard/boardinsert}">글쓰기</a>
+</body>
+</html>

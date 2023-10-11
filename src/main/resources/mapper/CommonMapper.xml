@@ -8,7 +8,7 @@
         SELECT count(*)
         FROM member
     </select>
-    
+
     
 </mapper>
 
