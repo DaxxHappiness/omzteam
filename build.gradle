@@ -51,6 +51,9 @@ dependencies {
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
 
+    // Spring Boot Starter for Spring Data JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // 다른 디펜던시들
 }
 
 tasks.named('test') {

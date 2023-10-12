@@ -7,8 +7,13 @@
 <body>
 <h1>작성 완료</h1>
 <p>제목: <span th:text="${approvalDto.title}"></span></p>
+<p>상태: <span th:text="${approvalDto.pass}"></span></p>
 <p>본문: <span th:text="${approvalDto.content}"></span></p>
+<p>코멘트: <span th:text="${approvalDto.comment}"></span></p>
 <a href="/goMain">목록으로</a>
-<a th:href="@{/approvalWriteForm(board_id=${approvalDto.board_id})}">결재</a>
+<!--<a th:href="@{/approvalWriteForm(board_id=${approvalDto.board_id})}">결재</a>-->
+<div th:if="${approvalDto.pass == '대기'}">
+    <a th:href="@{/approvalWriteForm(board_id=${approvalDto.board_id})}">결재</a>
+</div>
 </body>
 </html>

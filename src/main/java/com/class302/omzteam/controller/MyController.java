@@ -1,10 +1,14 @@
 package com.class302.omzteam.controller;
 
 import com.class302.omzteam.model.ApprovalDto;
+import com.class302.omzteam.model.ApprovalSubDto;
 import com.class302.omzteam.mybatis.ApprovalDao;
 import com.class302.omzteam.mybatis.MybatisDao;
 import com.class302.omzteam.service.ApprovalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +24,13 @@ public class MyController {
 
     @Autowired
     ApprovalDao approvalDao;
+
+    private final ApprovalService approvalService;
+
+    public MyController(ApprovalService approvalService) {
+        this.approvalService = approvalService;
+    }
+
 
     //작성 폼으로
     @GetMapping("/writeForm")
@@ -72,16 +83,34 @@ public class MyController {
 
     //결재 폼 작성
     @GetMapping("/approvalWriteForm")
-    public String showApprovalForm() {
+    public String showApprovalForm(@RequestParam int board_id,Model model) {
+//    ApprovalDto dto = approvalDao.selectOne(board_id);
+//    model.addAttribute("approvalDto", dto);
+        model.addAttribute("board_id", board_id);
         return "approvalWriteForm";
     }
 
-    @PostMapping("/approvalResultForm")
-    public String processApprovalForm(@ModelAttribute ApprovalDto approvalDto) {
+//    @PostMapping("/approvalResultForm")
+//    public String processApprovalForm(@ModelAttribute ApprovalDto approvalDto) {
+//        approvalDao.updateOne(approvalDto);
+//        return "approvalResultForm";
+//    }
 
-        approvalDao.updateOne(approvalDto);
+    @PostMapping("/approvalSuccessForm")
+    public void aSF(ApprovalSubDto SubDto) {
+        approvalDao.updateOne(SubDto);
+    }
 
+    @PostMapping("/approvalFailForm")
+    public void aSF2(ApprovalSubDto SubDto) {
+        approvalDao.updateTwo(SubDto);
+    }
+
+    @GetMapping("/approvalResultForm")
+    public String result() {
         return "approvalResultForm";
     }
+
+
 
 }

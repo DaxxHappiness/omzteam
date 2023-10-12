@@ -5,16 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/approvalResultForm" method="post" th:object="${approvalDto}">
-
-    <label for="pass">통과 여부:</label>
-    <textarea id="pass" name="pass" th:field="*{approval.pass}"></textarea><br/>
 
     <label for="comment">코멘트:</label>
-    <textarea id="comment" name="comment" th:field="*{approval.comment}"></textarea><br/>
-
-    <input type="submit" value="완료">
-
-</form>
+    <textarea id="comment" name="comment"></textarea><br/>
+    <button onclick="success()">결재 완료</button>
+    <button onclick="fail()">반려</button>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{approval.js}"></script>
 </body>
 </html>
